@@ -1,111 +1,467 @@
+
+/* =========================================
+   FERRETERÍA ELÉCTRICA - DISEÑO FUTURISTA
+   ========================================= */
+
 :root {
-  --text: #6b6375;
-  --text-h: #08060d;
-  --bg: #fff;
-  --border: #e5e4e7;
-  --code-bg: #f4f3ec;
-  --accent: #aa3bff;
-  --accent-bg: rgba(170, 59, 255, 0.1);
-  --accent-border: rgba(170, 59, 255, 0.5);
-  --social-bg: rgba(244, 243, 236, 0.5);
-  --shadow:
-    rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
+    --azul-oscuro: #071A2F;
+    --azul-principal: #123B61;
+    --azul-electrico: #087FC1;
+    --cian: #00B8E6;
+    --naranja: #FF9D16;
+    --amarillo: #FFD23F;
 
-  --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --heading: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --mono: ui-monospace, Consolas, monospace;
+    --blanco: #FFFFFF;
+    --fondo: #F1F6FA;
+    --texto: #19334D;
+    --texto-suave: #71869A;
 
-  font: 18px/145% var(--sans);
-  letter-spacing: 0.18px;
-  color-scheme: light dark;
-  color: var(--text);
-  background: var(--bg);
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-
-  @media (max-width: 1024px) {
-    font-size: 16px;
-  }
+    --borde: #E0EAF2;
+    --sombra: 0 10px 30px rgba(7, 26, 47, 0.08);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --text: #9ca3af;
-    --text-h: #f3f4f6;
-    --bg: #16171d;
-    --border: #2e303a;
-    --code-bg: #1f2028;
-    --accent: #c084fc;
-    --accent-bg: rgba(192, 132, 252, 0.15);
-    --accent-border: rgba(192, 132, 252, 0.5);
-    --social-bg: rgba(47, 48, 58, 0.5);
-    --shadow:
-      rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
-  }
+/* RESET */
 
-  #social .button-icon {
-    filter: invert(1) brightness(2);
-  }
-}
-
-#root {
-  width: 1126px;
-  max-width: 100%;
-  margin: 0 auto;
-  text-align: center;
-  border-inline: 1px solid var(--border);
-  min-height: 100svh;
-  display: flex;
-  flex-direction: column;
-  box-sizing: border-box;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 body {
-  margin: 0;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background:
+        radial-gradient(circle at 10% 10%, #DCEFFA 0, transparent 30%),
+        radial-gradient(circle at 90% 90%, #FFF0D8 0, transparent 25%),
+        var(--fondo);
+
+    color: var(--texto);
+    min-height: 100vh;
 }
 
-h1,
-h2 {
-  font-family: var(--heading);
-  font-weight: 500;
-  color: var(--text-h);
+/* =========================================
+   PANEL PRINCIPAL
+   ========================================= */
+
+.panel.lista {
+    width: 100%;
+    padding: 28px;
+    border-radius: 22px;
+
+    background: rgba(255, 255, 255, 0.92);
+    border: 1px solid rgba(255, 255, 255, 0.9);
+
+    box-shadow: var(--sombra);
+    backdrop-filter: blur(12px);
+
+    position: relative;
+    overflow: hidden;
 }
 
-h1 {
-  font-size: 56px;
-  letter-spacing: -1.68px;
-  margin: 32px 0;
-  @media (max-width: 1024px) {
-    font-size: 36px;
-    margin: 20px 0;
-  }
-}
-h2 {
-  font-size: 24px;
-  line-height: 118%;
-  letter-spacing: -0.24px;
-  margin: 0 0 8px;
-  @media (max-width: 1024px) {
-    font-size: 20px;
-  }
-}
-p {
-  margin: 0;
+/* Línea decorativa superior */
+
+.panel.lista::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 5px;
+
+    background: linear-gradient(
+        90deg,
+        var(--cian),
+        var(--azul-electrico),
+        var(--naranja),
+        var(--amarillo)
+    );
 }
 
-code,
-.counter {
-  font-family: var(--mono);
-  display: inline-flex;
-  border-radius: 4px;
-  color: var(--text-h);
+/* =========================================
+   CABECERA
+   ========================================= */
+
+.lista__cabecera {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 15px;
+
+    margin-bottom: 28px;
+    padding-bottom: 20px;
+
+    border-bottom: 1px solid var(--borde);
+    text-align: center;
 }
 
-code {
-  font-size: 15px;
-  line-height: 135%;
-  padding: 4px 8px;
-  background: var(--code-bg);
+.lista__cabecera h2 {
+    font-size: clamp(1.35rem, 3vw, 1.8rem);
+    font-weight: 800;
+    color: var(--azul-oscuro);
+    letter-spacing: -0.8px;
+
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+/* Icono decorativo */
+
+.lista__cabecera h2::before {
+    content: "⚡";
+
+    width: 42px;
+    height: 42px;
+
+    display: grid;
+    place-items: center;
+
+    border-radius: 13px;
+
+    background: linear-gradient(
+        135deg,
+        var(--naranja),
+        var(--amarillo)
+    );
+
+    color: var(--azul-oscuro);
+    font-size: 22px;
+
+    box-shadow: 0 5px 15px rgba(255, 157, 22, 0.25);
+}
+
+/* CONTADOR */
+
+.contador {
+    padding: 9px 17px;
+
+    border-radius: 30px;
+
+    background: #E6F7FD;
+    border: 1px solid #BDEBFA;
+
+    color: #0878A5;
+
+    font-size: 0.82rem;
+    font-weight: 800;
+    letter-spacing: 0.3px;
+}
+
+/* =========================================
+   TARJETAS DE PRODUCTOS
+   ========================================= */
+
+.tarjetas {
+    display: grid;
+
+    grid-template-columns:
+        repeat(auto-fill, minmax(min(100%, 230px), 1fr));
+
+    gap: 20px;
+
+    list-style: none;
+}
+
+/* TARJETA INDIVIDUAL */
+
+.tarjeta {
+    position: relative;
+
+    padding: 22px;
+
+    border-radius: 19px;
+
+    background: linear-gradient(
+        145deg,
+        #FFFFFF,
+        #F7FBFE
+    );
+
+    border: 1px solid var(--borde);
+
+    box-shadow: 0 5px 15px rgba(7, 26, 47, 0.04);
+
+    overflow: hidden;
+
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease,
+        border-color 0.3s ease;
+}
+
+/* Detalle luminoso */
+
+.tarjeta::before {
+    content: "";
+
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 4px;
+    height: 100%;
+
+    background: linear-gradient(
+        180deg,
+        var(--cian),
+        var(--azul-electrico)
+    );
+
+    transition: width 0.3s ease;
+}
+
+/* Círculo decorativo */
+
+.tarjeta::after {
+    content: "";
+
+    position: absolute;
+    width: 100px;
+    height: 100px;
+
+    top: -45px;
+    right: -40px;
+
+    border-radius: 50%;
+
+    background: rgba(0, 184, 230, 0.06);
+
+    pointer-events: none;
+}
+
+/* EFECTO HOVER */
+
+.tarjeta:hover {
+    transform: translateY(-7px);
+
+    border-color: var(--cian);
+
+    box-shadow:
+        0 15px 30px rgba(0, 140, 190, 0.12),
+        0 0 0 3px rgba(0, 184, 230, 0.05);
+}
+
+.tarjeta:hover::before {
+    width: 7px;
+}
+
+/* =========================================
+   ID DEL PRODUCTO
+   ========================================= */
+
+.tarjeta__id {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    min-width: 38px;
+    height: 28px;
+
+    padding: 0 10px;
+
+    border-radius: 8px;
+
+    background: var(--azul-oscuro);
+
+    color: var(--cian);
+
+    font-size: 0.75rem;
+    font-weight: 800;
+
+    letter-spacing: 0.5px;
+
+    margin-bottom: 15px;
+    
+}
+
+/* =========================================
+   NOMBRE DEL PRODUCTO
+   ========================================= */
+
+.tarjeta__nombre {
+    color: var(--azul-oscuro);
+
+    font-size: 1.08rem;
+    font-weight: 750;
+
+    line-height: 1.4;
+
+    margin-bottom: 22px;
+
+    min-height: 45px;
+
+    overflow-wrap: anywhere;
+    text-align: center;
+}
+
+/* =========================================
+   DATOS DEL PRODUCTO
+   ========================================= */
+
+.tarjeta__datos {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+
+    gap: 10px;
+
+    padding-top: 16px;
+
+    border-top: 1px dashed #D6E3ED;
+    text-align: center;
+}
+
+.tarjeta__datos div {
+    display: flex;
+    flex-direction: column;
+
+    gap: 7px;
+}
+
+.tarjeta__datos dt {
+    color: var(--texto-suave);
+
+    font-size: 0.75rem;
+    font-weight: 700;
+
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+}
+
+.tarjeta__datos dd {
+    color: var(--azul-principal);
+
+    font-size: 1.15rem;
+    font-weight: 850;
+}
+
+/* PRECIO */
+
+.tarjeta__datos div:first-child dd {
+    color: #E88A0C;
+}
+
+/* STOCK */
+
+.tarjeta__datos div:last-child dd {
+    color: #087FAF;
+}
+
+/* =========================================
+   ESTADO VACÍO
+   ========================================= */
+
+.vacio {
+    padding: 55px 20px;
+
+    text-align: center;
+
+    color: var(--texto-suave);
+
+    background: #F7FAFC;
+
+    border: 2px dashed #D5E3ED;
+
+    border-radius: 18px;
+
+    font-size: 0.95rem;
+    font-weight: 600;
+}
+
+/* =========================================
+   RESPONSIVE - TABLETS
+   ========================================= */
+
+@media (max-width: 768px) {
+
+    .panel.lista {
+        padding: 20px;
+        border-radius: 17px;
+    }
+
+    .tarjetas {
+        grid-template-columns:
+            repeat(auto-fill, minmax(min(100%, 200px), 1fr));
+
+        gap: 15px;
+    }
+
+    .tarjeta {
+        padding: 18px;
+    }
+
+}
+
+/* =========================================
+   RESPONSIVE - CELULARES
+   ========================================= */
+
+@media (max-width: 480px) {
+
+    .panel.lista {
+        padding: 16px;
+        border-radius: 14px;
+    }
+
+    .lista__cabecera {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 12px;
+
+        margin-bottom: 20px;
+    }
+
+    .lista__cabecera h2 {
+        font-size: 1.35rem;
+    }
+
+    .lista__cabecera h2::before {
+        width: 36px;
+        height: 36px;
+        font-size: 19px;
+    }
+
+    .contador {
+        font-size: 0.75rem;
+    }
+
+    .tarjetas {
+        grid-template-columns: 1fr;
+        gap: 13px;
+    }
+
+    .tarjeta {
+        padding: 19px;
+    }
+
+    .tarjeta__nombre {
+        min-height: auto;
+        margin-bottom: 17px;
+    }
+
+}
+
+/* =========================================
+   ANIMACIÓN DE APARICIÓN
+   ========================================= */
+
+@media (prefers-reduced-motion: no-preference) {
+
+    .tarjeta {
+        animation: aparecer 0.45s ease both;
+    }
+
+    @keyframes aparecer {
+        from {
+            opacity: 0;
+            transform: translateY(12px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
 }
