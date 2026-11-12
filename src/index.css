@@ -1082,3 +1082,56 @@ body {
     }
 
 }
+
+
+
+
+/* ---------- Botón editar ---------- */
+.boton-editar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  width: 100%;
+  padding: 0.6rem 0.75rem;
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  font-weight: bolder;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #121416;
+  background: var(--acento);
+  border: 1px solid #121416;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: background 0.2s, box-shadow 0.2s, transform 0.2s;
+  
+}
+
+.boton-editar svg {
+  flex-shrink: 0;
+  transition: transform 0.2s;
+}
+
+.boton-editar:hover {
+  background: #2bff00;
+  color: #121416;
+  border-color: #121416;
+  box-shadow: 3px 3px 0 0 #121416;
+  transform: translate(-1px, -1px);
+    font-weight: bolder;
+}
+
+.boton-editar:hover svg {
+  transform: rotate(-12deg) scale(1.15);
+}
+
+.boton-editar:focus-visible {
+  outline: 2px solid var(--tinta);
+  outline-offset: 2px;
+}
+
+.boton-editar:active {
+  transform: translate(0, 1px);
+  box-shadow: none;
+}
