@@ -4,7 +4,7 @@ import { crearProducto, actualizarProducto, type Producto } from "../services/pr
 
 interface Props {
     productoEditar: Producto | null;
-    onGuardado:()=>void;
+    onGuardado: () => void;
 }
 
 function ProductoForm({ productoEditar, onGuardado }: Props) {
@@ -33,7 +33,7 @@ function ProductoForm({ productoEditar, onGuardado }: Props) {
 
             if (productoEditar) {
                 await actualizarProducto({
-                    id:productoEditar.id, 
+                    id: productoEditar.id,
                     nombre,
                     precio: Number(precio),
                     stock: Number(stock)
@@ -58,6 +58,11 @@ function ProductoForm({ productoEditar, onGuardado }: Props) {
         setPrecio("");
         setStock("");
         setErrores({});
+    }
+
+    const cancelar=()=>{
+        limpiarFormulario();
+        onGuardado();
     }
 
     const validarCampos = (): boolean => {
@@ -132,8 +137,14 @@ function ProductoForm({ productoEditar, onGuardado }: Props) {
 
                     <button type="submit" className="boton" disabled={guardando}>
 
-                        {guardando ? (productoEditar?"Actualizando...":"Guardando...") : (productoEditar?"Actualizar":"Registrar")}
+                        {guardando ? (productoEditar ? "Actualizando..." : "Guardando...") : (productoEditar ? "Actualizar" : "Registrar")}
                     </button>
+                    {
+                    productoEditar && <button className="boton" style={{background:"red"}} onClick={cancelar}>
+                        Cancelar
+                    </button>
+                    }
+
                 </form>
             </div>
         </div>
