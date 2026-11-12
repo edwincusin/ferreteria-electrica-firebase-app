@@ -1,5 +1,5 @@
 import { db } from "../firebase";
-import { addDoc, collection, doc, getDocs, updateDoc } from "firebase/firestore";
+import { addDoc, collection, deleteDoc, doc, getDocs, updateDoc } from "firebase/firestore";
 
 //FORMA /INTERFAZ DEFINIDA DE UN PRODUCTO
 export interface Producto {
@@ -42,3 +42,11 @@ export const actualizarProducto=async(producto:Producto)=>{
         stock:producto.stock
     });
 }
+
+
+//ELIMINAR UN PRODCUTO MEDIANTE ID
+export const eliminarProducto=async(id:string)=>{
+
+    const referenciaProducto=doc(db,"productos",id);
+    await deleteDoc(referenciaProducto);
+} 
