@@ -1,7 +1,13 @@
 import ProductoLista from "./components/ProductoLista"
 import ProductoForm from "./components/ProductoFom"
+import { useState } from "react";
+import type { Producto } from "./services/productoService";
+
+
 function App() {
 
+    const [editarProducto, setEditarProducto]=useState<Producto|null>(null);
+    const [recargar, setRecargar]=useState(0);
 
 return (
     <main className="inventario">
@@ -33,11 +39,20 @@ return (
         <section className="inventario__contenido">
 
             <div className="inventario__form">
-                <ProductoForm />
+                <ProductoForm 
+                key={editarProducto?.id??"Nuevo"}
+                    productoEditar={editarProducto}
+                    onGuardado={()=>{
+                        setEditarProducto(null);
+                        setRecargar((n)=>n+1);
+                    }}
+                />
             </div>
 
             <div className="inventario__lista">
-                <ProductoLista />
+                <ProductoLista 
+                onEditar={setEditarProducto}
+                />
             </div>
 
         </section>

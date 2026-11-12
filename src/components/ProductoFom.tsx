@@ -1,8 +1,13 @@
 import { useState, type SyntheticEvent } from "react"
-import { crearProducto } from "../services/productoService";
+import { crearProducto, actualizarProducto, type Producto } from "../services/productoService";
 
 
-function ProductoForm() {
+interface Props {
+    productoEditar: Producto | null;
+    onGuardado:()=>void;
+}
+
+function ProductoForm({ productoEditar, onGuardado }: Props) {
 
     type Errores = {
         nombre?: string;
@@ -10,9 +15,10 @@ function ProductoForm() {
         stock?: string;
     };
 
-    const [nombre, setNombre] = useState("");
-    const [precio, setPrecio] = useState("");
-    const [stock, setStock] = useState("");
+    const [nombre, setNombre] = useState(productoEditar?.nombre ?? "");
+    const [precio, setPrecio] = useState(productoEditar?.precio.toString() ?? "");
+    const [stock, setStock] = useState(productoEditar?.stock ?? "");
+
     const [guardando, setGuardando] = useState(false);
     const [errores, setErrores] = useState<Errores>({});
 
@@ -25,8 +31,19 @@ function ProductoForm() {
 
         try {
 
-            const idCreado = await crearProducto(nombre, Number(precio), Number(stock));
-            console.log("Producto creado con ID:", idCreado);
+            if (productoEditar) {
+                await actualizarProducto({
+                    id:productoEditar.id, 
+                    nombre,
+                    precio: Number(precio),
+                    stock: Number(stock)
+                });
+                console.log("Producto actualizado de ID:");
+                onGuardado();
+            } else {
+                const idCreado = await crearProducto(nombre, Number(precio), Number(stock));
+                console.log("Producto creado con ID:", idCreado);
+            }
             limpiarFormulario();
 
         } catch (error) {
@@ -114,7 +131,8 @@ function ProductoForm() {
                     </div>
 
                     <button type="submit" className="boton" disabled={guardando}>
-                        {guardando ? "Guardando..." : "Registrar"}
+
+                        {guardando ? (productoEditar?"Actualizando...":"Guardando...") : (productoEditar?"Actualizar":"Registrar")}
                     </button>
                 </form>
             </div>
