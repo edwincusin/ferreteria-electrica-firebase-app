@@ -24,10 +24,15 @@ function ProductoLista({ onEditar }: Props) {
         cargarProductos();
     });
 
-    const manejarEliminarProducto = async (id: string) => {
+    const manejarEliminarProducto = async (producto:Producto) => {
 
+        const confirmadoEliminar=window.confirm("¿Estas seguro de eliminar? "+producto.nombre);
+
+        if(!confirmadoEliminar) return;
+        
         try {
-            await eliminarProducto(id);
+
+            await eliminarProducto(producto.id);
             console.log("Prodcuto eliminado de id: ", id);
         } catch (error) {
             console.error("ERROR: ", error);
@@ -66,7 +71,7 @@ function ProductoLista({ onEditar }: Props) {
                                         <FiEdit2 size={14} />
                                         Editar
                                     </button>
-                                    <button type="button" className="boton-editar" onClick={() => manejarEliminarProducto(producto.id)}>
+                                    <button type="button" className="boton-eliminar" onClick={() => manejarEliminarProducto(producto)}>
                                         <FiTrash2 size={14} />
                                         Eliminar
                                     </button>

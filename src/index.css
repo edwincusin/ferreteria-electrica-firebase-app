@@ -1084,7 +1084,17 @@ body {
 }
 
 
+/* ---------- Acciones de la tarjeta ---------- */
+.tarjeta__acciones {
+  display: flex;
+  gap: 0.5rem;
+  width: 100%;
+}
 
+.tarjeta__acciones button {
+  flex: 1;
+  width: auto;
+}
 
 /* ---------- Botón editar ---------- */
 .boton-editar {
@@ -1092,11 +1102,10 @@ body {
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  width: 100%;
   padding: 0.6rem 0.75rem;
   font-family: var(--mono);
   font-size: 0.7rem;
-  font-weight: bolder;
+  font-weight: 700;
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: #121416;
@@ -1104,8 +1113,7 @@ body {
   border: 1px solid #121416;
   border-radius: 2px;
   cursor: pointer;
-  transition: background 0.2s, box-shadow 0.2s, transform 0.2s;
-  
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s, transform 0.2s;
 }
 
 .boton-editar svg {
@@ -1114,12 +1122,11 @@ body {
 }
 
 .boton-editar:hover {
-  background: #2bff00;
-  color: #121416;
+  background: #1f8a3b;
+  color: #ffffff;
   border-color: #121416;
   box-shadow: 3px 3px 0 0 #121416;
   transform: translate(-1px, -1px);
-    font-weight: bolder;
 }
 
 .boton-editar:hover svg {
@@ -1132,6 +1139,66 @@ body {
 }
 
 .boton-editar:active {
+  transform: translate(0, 1px);
+  box-shadow: none;
+}
+
+
+/* ---------- Acciones de la tarjeta ---------- */
+.tarjeta__acciones {
+  display: flex;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+.tarjeta__acciones button {
+  flex: 1;
+  width: auto;
+}
+
+/* ---------- Botón eliminar ---------- */
+.boton-eliminar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.6rem 0.75rem;
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #121416;
+  background: #ff6b57;
+  border: 1px solid #121416;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s, transform 0.2s;
+}
+
+.boton-eliminar svg {
+  flex-shrink: 0;
+  transition: transform 0.2s;
+}
+
+.boton-eliminar:hover {
+  background: #c0321f;
+  color: #ffffff;
+  border-color: #121416;
+  box-shadow: 3px 3px 0 0 #121416;
+  transform: translate(-1px, -1px);
+}
+
+.boton-eliminar:hover svg {
+  transform: scale(1.15) rotate(8deg);
+}
+
+.boton-eliminar:focus-visible {
+  outline: 2px solid var(--tinta);
+  outline-offset: 2px;
+}
+
+.boton-eliminar:active {
   transform: translate(0, 1px);
   box-shadow: none;
 }
