@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { obtenerProductos, type Producto } from "../services/productoService";
-import { FiEdit2 } from "react-icons/fi";
+import { obtenerProductos, eliminarProducto, type Producto } from "../services/productoService";
+import { FiEdit2, FiTrash2 } from "react-icons/fi";
 
 
 
@@ -23,6 +23,16 @@ function ProductoLista({ onEditar }: Props) {
         }
         cargarProductos();
     });
+
+    const manejarEliminarProducto = async (id: string) => {
+
+        try {
+            await eliminarProducto(id);
+            console.log("Prodcuto eliminado de id: ", id);
+        } catch (error) {
+            console.error("ERROR: ", error);
+        }
+    }
 
     return (
         <div className="panel lista">
@@ -55,6 +65,10 @@ function ProductoLista({ onEditar }: Props) {
                                     <button type="button" className="boton-editar" onClick={() => onEditar(producto)}>
                                         <FiEdit2 size={14} />
                                         Editar
+                                    </button>
+                                    <button type="button" className="boton-editar" onClick={() => manejarEliminarProducto(producto.id)}>
+                                        <FiTrash2 size={14} />
+                                        Eliminar
                                     </button>
                                 </div>
 
