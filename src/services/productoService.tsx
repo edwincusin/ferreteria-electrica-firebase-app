@@ -1,5 +1,5 @@
 import { db } from "../firebase";
-import { addDoc, collection, getDocs } from "firebase/firestore";
+import { addDoc, collection, doc, getDocs, updateDoc } from "firebase/firestore";
 
 //FORMA /INTERFAZ DEFINIDA DE UN PRODUCTO
 export interface Producto {
@@ -31,4 +31,14 @@ export const obtenerProductos = async (): Promise<Producto[]> => {
     return productos;
 };
 
+//MODIFICAR PRODUCTO POR ID
+export const actualizarProducto=async(producto:Producto)=>{
+    //referenciaProducto==>> captura la direccion/ruta del producto
+    const referenciaProducto = doc(db,"productos",producto.id);
 
+    await updateDoc(referenciaProducto,{
+        nombre:producto.nombre,
+        precio:producto.precio,
+        stock:producto.stock
+    });
+}
