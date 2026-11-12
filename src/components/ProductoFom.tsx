@@ -93,7 +93,10 @@ function ProductoForm({ productoEditar, onGuardado }: Props) {
         <div>
             <div className="panel">
                 <header className="panel__cabecera">
-                    <h1>Registro de productos</h1>
+
+                    {productoEditar?
+                    <h1 style={{color:"tomato"}}>Editar Producto</h1>:
+                    <h1>Registro de productos</h1>}
                 </header>
 
                 <form className="formulario" onSubmit={guardarProducto}>
